@@ -1,0 +1,16 @@
+server {
+    listen 80;
+    server_name www.skyhighcrackers.co.in;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        root /home/yourusername/myproject;
+    }
+
+    location / {
+        proxy_pass http://62.72.30.210:8000;  # Change this line
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
